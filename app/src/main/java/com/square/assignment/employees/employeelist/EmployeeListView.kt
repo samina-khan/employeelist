@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,23 +29,23 @@ fun EmployeeListView(navController: NavController, viewModel: EmployeeListViewMo
     val uiState by viewModel.uiState.collectAsState()
 
     val isRefreshing by remember { mutableStateOf(false) }
-    val businesses by viewModel.employeesFlow.collectAsState()
+    val employees by viewModel.employeesFlow.collectAsState()
 
     Column() {
 
         when (uiState) {
             is UiState.Loading -> CircularProgressIndicator()
             is UiState.Success -> {
-                if (businesses.isNotEmpty()) {
-                    EmployeeList(businesses) { businessId ->
-                        navController.navigate("details/$businessId")
+                if (employees.isNotEmpty()) {
+                    EmployeeList(employees) { employeeId ->
+                        navController.navigate("details/$employeeId")
                     }
                 } else {
-                    Text(text = "No businesses found.")
+                    Text(text = "No employees found.")
                 }
             }
             is UiState.Error -> Text(text = (uiState as UiState.Error).message)
-            is UiState.Empty -> Text("No businesses found.")
+            is UiState.Empty -> Text("No employees found.")
         }
     }
 }
