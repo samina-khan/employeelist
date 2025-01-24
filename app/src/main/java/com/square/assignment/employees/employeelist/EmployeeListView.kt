@@ -58,7 +58,7 @@ fun EmployeeList(employees: List<Employee>, onItemClick: (String) -> Unit) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clickable { onItemClick(employee.full_name) }
+                    .clickable { onItemClick(employee.uuid) }
                     .padding(16.dp)
             ) {
 

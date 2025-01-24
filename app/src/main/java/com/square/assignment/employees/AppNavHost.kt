@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.square.assignment.employees.employeedetails.EmployeeDetailsView
 import com.square.assignment.employees.employeelist.EmployeeListView
 
 object Routes {
@@ -28,7 +29,7 @@ fun AppNavHost(
 
         composable("details/{id}") { backStackEntry ->
             val id = backStackEntry.arguments?.getString("id")
-            //EmployeeDetailsView(navController, id)
+            EmployeeDetailsView(navController, id)
         }
     }
 }
