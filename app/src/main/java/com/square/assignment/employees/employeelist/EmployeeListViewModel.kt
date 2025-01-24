@@ -1,5 +1,6 @@
 package com.square.assignment.employees.employeelist
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.square.assignment.employees.data.model.Employee
@@ -36,6 +37,7 @@ class EmployeeListViewModel @Inject constructor(
                 repository.getEmployeesFlow().collect { employees ->
                     _employeesFlow.value = employees
                     _uiState.value = if (employees.isEmpty()) UiState.Empty else UiState.Success
+                    Log.d("EmployeeListViewModel", "Employees: $employees")
                 }
             } catch (e: Exception) {
                 _uiState.value = UiState.Error("Failed to load employee list: ${e.message}")
