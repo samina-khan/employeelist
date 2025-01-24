@@ -22,9 +22,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import coil.compose.AsyncImage
 import com.square.assignment.employees.data.model.Employee
 
 import com.square.assignment.employees.employeedetails.EmployeeDetailsViewModel.UiState
@@ -46,6 +48,7 @@ fun EmployeeDetailsView(
         IconButton(onClick = { navController.popBackStack() }) {
             Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
         }
+
 
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -74,15 +77,15 @@ fun EmployeeDetails(employee: Employee) {
         elevation = CardDefaults.cardElevation(8.dp)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            /*
+
             AsyncImage(
-                model = employee.image_url,
-                contentDescription = "Business Image",
+                model = employee.photo_url_large,
+                contentDescription = "Employee Image",
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(200.dp)
                     .clip(RoundedCornerShape(16.dp))
-            )*/
+            )
 
             Spacer(modifier = Modifier.height(16.dp))
 
