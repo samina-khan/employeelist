@@ -1,6 +1,5 @@
 package com.square.assignment.employees.employeelist
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.square.assignment.employees.data.model.Employee
@@ -25,6 +24,8 @@ class EmployeeListViewModel @Inject constructor(
     private val _employeesFlow = MutableStateFlow<List<Employee>>(emptyList())
     val employeesFlow: StateFlow<List<Employee>> get() = _employeesFlow
 
+    private val _isRefreshing = MutableStateFlow(false)
+    val isRefreshing: StateFlow<Boolean> = _isRefreshing
 
     init {
         fetchEmployees()
@@ -32,6 +33,7 @@ class EmployeeListViewModel @Inject constructor(
 
     fun fetchEmployees() {
         viewModelScope.launch(dispatcher) {
+            _isRefreshing.value = true
             _uiState.value = UiState.Loading
             try {
                 repository.getEmployeesFlow().collect { employees ->
@@ -41,6 +43,7 @@ class EmployeeListViewModel @Inject constructor(
             } catch (e: Exception) {
                 _uiState.value = UiState.Error("Failed to load employee list: ${e.message}")
             }
+            _isRefreshing.value = false
         }
     }
 

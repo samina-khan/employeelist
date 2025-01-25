@@ -79,7 +79,7 @@ fun EmployeeDetails(employee: Employee) {
         Column(modifier = Modifier.padding(16.dp)) {
 
             AsyncImage(
-                model = employee.photo_url_large,
+                model = employee.photo_url_large?:"",
                 contentDescription = "Employee Image",
                 modifier = Modifier
                     .fillMaxWidth()
@@ -90,20 +90,20 @@ fun EmployeeDetails(employee: Employee) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = employee.full_name,
+                text = employee.full_name?:"",
                 style = MaterialTheme.typography.headlineMedium,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
 
             Text(
-                text = employee.team,
+                text = employee.team?:"",
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
 
             Text(
-                text = "email: ${employee.email_address}",
+                text = "email: ${employee.email_address?:""}",
                 style = MaterialTheme.typography.bodyMedium
             )
         }

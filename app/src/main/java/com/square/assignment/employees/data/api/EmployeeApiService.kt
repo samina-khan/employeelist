@@ -4,7 +4,7 @@ import com.square.assignment.employees.data.model.EmployeeResponse
 import retrofit2.http.GET
 
 interface EmployeeApiService {
-    @GET("employees.json")
+    @GET("employees_malformed.json")
     suspend fun getEmployees(): EmployeeResponse
 
 }

@@ -27,73 +27,78 @@ import com.square.assignment.employees.data.model.Employee
 
 import com.square.assignment.employees.employeelist.EmployeeListViewModel.UiState
 
-
 @Composable
 fun EmployeeListView(navController: NavController, viewModel: EmployeeListViewModel = hiltViewModel()) {
     val uiState by viewModel.uiState.collectAsState()
-
-    val isRefreshing by remember { mutableStateOf(false) }
+    val isRefreshing by viewModel.isRefreshing.collectAsState()
     val employees by viewModel.employeesFlow.collectAsState()
 
-    Column() {
-        SwipeRefresh(
-            state = rememberSwipeRefreshState(isRefreshing),
-            onRefresh = {
-                viewModel.fetchEmployees()
-            }
-        ){
+    SwipeRefresh(
+        state = rememberSwipeRefreshState(isRefreshing),
+        onRefresh = { viewModel.fetchEmployees() }
+    ) {
+        LazyColumn(modifier = Modifier.fillMaxWidth()) {
             when (uiState) {
-                is UiState.Loading -> CircularProgressIndicator()
+                is UiState.Loading -> item {
+
+                }
+                is UiState.Error -> item {
+                    Text(text = (uiState as UiState.Error).message, modifier = Modifier.padding(16.dp))
+                }
+                is UiState.Empty -> item {
+                    Text(text = "No employees found.", modifier = Modifier.padding(16.dp))
+                }
                 is UiState.Success -> {
                     if (employees.isNotEmpty()) {
-                        EmployeeList(employees) { employeeId ->
-                            navController.navigate("details/$employeeId")
+                        items(employees) { employee ->
+                            if (!employee.uuid.isNullOrEmpty()) {
+                                EmployeeItem(employee) { employeeId ->
+                                    navController.navigate("details/$employeeId")
+                                }
+                            }
                         }
                     } else {
-                        Text(text = "No employees found.")
+                        item {
+                            Text(text = "No employees found.", modifier = Modifier.padding(16.dp))
+                        }
                     }
                 }
-                is UiState.Error -> Text(text = (uiState as UiState.Error).message)
-                is UiState.Empty -> Text("No employees found.")
             }
         }
     }
 }
 
 
+
 @Composable
-fun EmployeeList(employees: List<Employee>, onItemClick: (String) -> Unit) {
-    LazyColumn {
-        items(employees) { employee ->
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { onItemClick(employee.uuid) }
-                    .padding(16.dp)
-            ) {
-                androidx.compose.foundation.Image(
-                    painter = rememberAsyncImagePainter(employee.photo_url_small),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(64.dp)
-                        .padding(end = 8.dp)
-                )
-                Column {
-                    Text(
-                        text = employee.full_name,
-                        style = MaterialTheme.typography.titleSmall,
-                        modifier = Modifier.padding(bottom = 4.dp)
-                    )
-                    Text(
-                        text = employee.team,
-                        style = androidx.compose.ui.text.TextStyle(color = androidx.compose.ui.graphics.Color.Gray)
-                    )
-                }
-            }
-            androidx.compose.material3.Divider(
-                modifier = Modifier.padding(vertical = 8.dp),
-                color = androidx.compose.ui.graphics.Color.LightGray
+fun EmployeeItem(employee: Employee, onItemClick: (String) -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { employee.uuid?.let { onItemClick(it) } }
+            .padding(16.dp)
+    ) {
+        androidx.compose.foundation.Image(
+            painter = rememberAsyncImagePainter(employee.photo_url_small ?: ""),
+            contentDescription = null,
+            modifier = Modifier
+                .size(64.dp)
+                .padding(end = 8.dp)
+        )
+        Column {
+            Text(
+                text = employee.full_name ?: "",
+                style = MaterialTheme.typography.titleSmall,
+                modifier = Modifier.padding(bottom = 4.dp)
+            )
+            Text(
+                text = employee.team ?: "",
+                style = androidx.compose.ui.text.TextStyle(color = androidx.compose.ui.graphics.Color.Gray)
             )
         }
     }
+    androidx.compose.material3.Divider(
+        modifier = Modifier.padding(vertical = 8.dp),
+        color = androidx.compose.ui.graphics.Color.LightGray
+    )
 }
