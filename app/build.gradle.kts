@@ -60,6 +60,9 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
 
+    implementation(libs.coil.compose)
+    implementation(libs.accompanist.swiperefresh)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

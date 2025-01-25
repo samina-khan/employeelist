@@ -21,6 +21,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.square.assignment.employees.data.model.Employee
 
 import com.square.assignment.employees.employeelist.EmployeeListViewModel.UiState
@@ -34,20 +36,26 @@ fun EmployeeListView(navController: NavController, viewModel: EmployeeListViewMo
     val employees by viewModel.employeesFlow.collectAsState()
 
     Column() {
-
-        when (uiState) {
-            is UiState.Loading -> CircularProgressIndicator()
-            is UiState.Success -> {
-                if (employees.isNotEmpty()) {
-                    EmployeeList(employees) { employeeId ->
-                        navController.navigate("details/$employeeId")
-                    }
-                } else {
-                    Text(text = "No employees found.")
-                }
+        SwipeRefresh(
+            state = rememberSwipeRefreshState(isRefreshing),
+            onRefresh = {
+                viewModel.fetchEmployees()
             }
-            is UiState.Error -> Text(text = (uiState as UiState.Error).message)
-            is UiState.Empty -> Text("No employees found.")
+        ){
+            when (uiState) {
+                is UiState.Loading -> CircularProgressIndicator()
+                is UiState.Success -> {
+                    if (employees.isNotEmpty()) {
+                        EmployeeList(employees) { employeeId ->
+                            navController.navigate("details/$employeeId")
+                        }
+                    } else {
+                        Text(text = "No employees found.")
+                    }
+                }
+                is UiState.Error -> Text(text = (uiState as UiState.Error).message)
+                is UiState.Empty -> Text("No employees found.")
+            }
         }
     }
 }
