@@ -16,6 +16,10 @@ hilt = "2.53.1"
 ksp = "2.1.0-1.0.29"
 retrofit = "2.9.0"
 
+kotlinxCoroutines = "1.9.0"
+mockk = "1.13.7"
+mockwebserver = "4.10.0"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -42,6 +46,10 @@ retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", ver
 
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanistSwiperefresh" }
+
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+mockwebserver = { module = "com.squareup.okhttp3:mockwebserver", version.ref = "mockwebserver" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

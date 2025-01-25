@@ -63,7 +63,12 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.accompanist.swiperefresh)
 
+
     testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockk)
+    testImplementation(libs.mockwebserver)
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
