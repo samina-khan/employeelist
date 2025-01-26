@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -17,6 +18,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -51,10 +54,8 @@ fun EmployeeListView(navController: NavController, viewModel: EmployeeListViewMo
                 is UiState.Success -> {
                     if (employees.isNotEmpty()) {
                         items(employees) { employee ->
-                            if (!employee.uuid.isNullOrEmpty()) {
-                                EmployeeItem(employee) { employeeId ->
-                                    navController.navigate("details/$employeeId")
-                                }
+                            EmployeeItem(employee) { employeeId ->
+                                navController.navigate("details/$employeeId")
                             }
                         }
                     } else {
@@ -80,25 +81,24 @@ fun EmployeeItem(employee: Employee, onItemClick: (String) -> Unit) {
     ) {
         androidx.compose.foundation.Image(
             painter = rememberAsyncImagePainter(employee.photo_url_small ?: ""),
-            contentDescription = null,
+            contentDescription = "Employee Thumbnail",
+            contentScale = ContentScale.Crop,
             modifier = Modifier
+                .clip(RoundedCornerShape(16.dp))
                 .size(64.dp)
-                .padding(end = 8.dp)
         )
-        Column {
+        Column (modifier = Modifier.padding(horizontal = 8.dp)) {
             Text(
                 text = employee.full_name.ifEmpty { "Unknown Name" },
-                style = MaterialTheme.typography.titleSmall,
-                modifier = Modifier.padding(bottom = 4.dp)
+                style = MaterialTheme.typography.titleMedium,
             )
             Text(
                 text = employee.team.ifEmpty { "Unknown Team" },
-                style = androidx.compose.ui.text.TextStyle(color = androidx.compose.ui.graphics.Color.Gray)
+                style = MaterialTheme.typography.bodyMedium,
             )
         }
     }
     androidx.compose.material3.Divider(
-        modifier = Modifier.padding(vertical = 8.dp),
         color = androidx.compose.ui.graphics.Color.LightGray
     )
 }
