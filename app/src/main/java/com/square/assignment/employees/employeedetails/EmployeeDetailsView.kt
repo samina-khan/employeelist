@@ -24,10 +24,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.square.assignment.employees.R
 import com.square.assignment.employees.data.model.Employee
 
 import com.square.assignment.employees.employeedetails.EmployeeDetailsViewModel.UiState
@@ -81,7 +83,8 @@ fun EmployeeDetails(employee: Employee) {
         Column(modifier = Modifier.padding(16.dp)) {
 
             AsyncImage(
-                model = employee.photo_url_large?:"",
+                model = employee.photo_url_large,
+                placeholder = painterResource(id = R.drawable.stockimage),
                 contentDescription = "Employee Image",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier

@@ -20,12 +20,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import com.square.assignment.employees.R
 import com.square.assignment.employees.data.model.Employee
 
 import com.square.assignment.employees.employeelist.EmployeeListViewModel.UiState
@@ -80,7 +82,8 @@ fun EmployeeItem(employee: Employee, onItemClick: (String) -> Unit) {
             .padding(16.dp)
     ) {
         androidx.compose.foundation.Image(
-            painter = rememberAsyncImagePainter(employee.photo_url_small ?: ""),
+            painter = rememberAsyncImagePainter(model=employee.photo_url_small, placeholder = painterResource(
+                R.drawable.stockimage)),
             contentDescription = "Employee Thumbnail",
             contentScale = ContentScale.Crop,
             modifier = Modifier
