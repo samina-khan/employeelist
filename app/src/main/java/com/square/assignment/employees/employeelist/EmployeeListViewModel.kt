@@ -43,7 +43,7 @@ class EmployeeListViewModel @Inject constructor(
                 }
             } catch (e: Exception) {
                 _employeesFlow.value = emptyList()
-                _uiState.value = UiState.Error("Failed to load employee list: ${e.message}")
+                _uiState.value = UiState.Error("Unexpected error. Failed to load employee list.")
             }
             _isRefreshing.value = false
         }
