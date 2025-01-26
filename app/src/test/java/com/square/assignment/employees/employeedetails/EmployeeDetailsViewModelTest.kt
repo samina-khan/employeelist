@@ -1,6 +1,7 @@
 package com.square.assignment.employees.employeedetails
 
 import com.square.assignment.employees.data.model.Employee
+import com.square.assignment.employees.data.model.EmployeeType
 import com.square.assignment.employees.data.repository.EmployeesRepository
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -44,7 +45,7 @@ class EmployeeDetailsViewModelTest {
             photo_url_small = "https://example.com/small.jpg",
             photo_url_large = "https://example.com/large.jpg",
             team = "Engineering",
-            employee_type = "FULL_TIME"
+            employee_type = EmployeeType.FULL_TIME
         )
 
         coEvery { repository.getEmployeeDetails("1234") } returns mockEmployee

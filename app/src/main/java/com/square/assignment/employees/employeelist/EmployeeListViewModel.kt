@@ -38,14 +38,17 @@ class EmployeeListViewModel @Inject constructor(
             try {
                 repository.getEmployeesFlow().collect { employees ->
                     _employeesFlow.value = employees
-                    _uiState.value = if (employees.isEmpty()) UiState.Empty else UiState.Success
+                    _uiState.value = if (employees.isEmpty()) UiState.Empty
+                    else UiState.Success
                 }
             } catch (e: Exception) {
+                _employeesFlow.value = emptyList()
                 _uiState.value = UiState.Error("Failed to load employee list: ${e.message}")
             }
             _isRefreshing.value = false
         }
     }
+
 
     sealed class UiState {
         object Loading : UiState()

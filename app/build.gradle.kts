@@ -5,6 +5,7 @@ plugins {
 
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+    kotlin("plugin.serialization") version "2.1.0"
 }
 
 android {
@@ -59,9 +60,12 @@ dependencies {
 
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.retrofit2.kotlinx.serialization.converter)
 
     implementation(libs.coil.compose)
     implementation(libs.accompanist.swiperefresh)
+    implementation(libs.kotlinx.serialization.json)
 
 
     testImplementation(libs.junit)

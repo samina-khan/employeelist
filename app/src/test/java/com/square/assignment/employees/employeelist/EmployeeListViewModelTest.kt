@@ -1,6 +1,7 @@
 package com.square.assignment.employees.employeelist
 
 import com.square.assignment.employees.data.model.Employee
+import com.square.assignment.employees.data.model.EmployeeType
 import com.square.assignment.employees.data.repository.EmployeesRepository
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -47,7 +48,7 @@ class EmployeeListViewModelTest {
                 photo_url_small = "https://example.com/small.jpg",
                 photo_url_large = "https://example.com/large.jpg",
                 team = "Engineering",
-                employee_type = "FULL_TIME"
+                employee_type = EmployeeType.FULL_TIME
             )
         )
 
@@ -61,8 +62,9 @@ class EmployeeListViewModelTest {
 
     @Test
     fun `fetchEmployees updates uiState to Error when repository throws exception`() = runTest {
+        val errorMessage = "Dummy Error"
         coEvery { repository.getEmployeesFlow() } returns flow {
-            throw Exception("Network error")
+            throw Exception(errorMessage)
         }
 
         viewModel.fetchEmployees()
@@ -70,7 +72,7 @@ class EmployeeListViewModelTest {
 
         assert(viewModel.uiState.value is EmployeeListViewModel.UiState.Error)
         val errorState = viewModel.uiState.value as EmployeeListViewModel.UiState.Error
-        assert(errorState.message.contains("Failed to load employee list: Network error"))
+        assert(errorState.message.contains("Failed to load employee list: $errorMessage"))
     }
 
     @Test

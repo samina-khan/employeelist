@@ -75,7 +75,7 @@ fun EmployeeItem(employee: Employee, onItemClick: (String) -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { employee.uuid?.let { onItemClick(it) } }
+            .clickable { employee.uuid.let { onItemClick(it) } }
             .padding(16.dp)
     ) {
         androidx.compose.foundation.Image(
@@ -87,12 +87,12 @@ fun EmployeeItem(employee: Employee, onItemClick: (String) -> Unit) {
         )
         Column {
             Text(
-                text = employee.full_name ?: "",
+                text = employee.full_name.ifEmpty { "Unknown Name" },
                 style = MaterialTheme.typography.titleSmall,
                 modifier = Modifier.padding(bottom = 4.dp)
             )
             Text(
-                text = employee.team ?: "",
+                text = employee.team.ifEmpty { "Unknown Team" },
                 style = androidx.compose.ui.text.TextStyle(color = androidx.compose.ui.graphics.Color.Gray)
             )
         }

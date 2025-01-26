@@ -3,6 +3,7 @@ package com.square.assignment.employees.data.repository
 import com.square.assignment.employees.data.api.EmployeeApiService
 import com.square.assignment.employees.data.model.Employee
 import com.square.assignment.employees.data.model.EmployeeResponse
+import com.square.assignment.employees.data.model.EmployeeType
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -34,7 +35,7 @@ class EmployeesRepositoryTest {
                 photo_url_small = "https://example.com/small.jpg",
                 photo_url_large = "https://example.com/large.jpg",
                 team = "Engineering",
-                employee_type = "FULL_TIME"
+                employee_type = EmployeeType.FULL_TIME
             )
         )
         val mockResponse = EmployeeResponse(employees = mockEmployees)
@@ -75,7 +76,7 @@ class EmployeesRepositoryTest {
                 photo_url_small = "https://example.com/small.jpg",
                 photo_url_large = "https://example.com/large.jpg",
                 team = "Engineering",
-                employee_type = "FULL_TIME"
+                employee_type = EmployeeType.FULL_TIME
             )
         )
         val mockResponse = EmployeeResponse(employees = mockEmployees)

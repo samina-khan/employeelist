@@ -96,16 +96,20 @@ fun EmployeeDetails(employee: Employee) {
             )
 
             Text(
-                text = employee.team?:"",
+                text = employee.team,
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
-
             Text(
-                text = "email: ${employee.email_address?:""}",
+                text = "${employee.email_address}",
                 style = MaterialTheme.typography.bodyMedium
             )
+            Text(
+                text = "email: ${employee.email_address}",
+                style = MaterialTheme.typography.bodyMedium
+            )
+
         }
     }
 }
