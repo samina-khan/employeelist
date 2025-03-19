@@ -40,7 +40,6 @@ With more time, I would have:
 ## What do you think is the weakest part of your project?
 The weakest part of the project is the lack of offline caching. This would have improved the user experience by allowing them to view the last fetched data when offline.
 
-![List](https://github.com/user-attachments/assets/b5e2c489-3590-4f11-9dfd-f1499668e572)
 
 
-![employeedetail](https://github.com/user-attachments/assets/6fecdf02-ccb5-4b1d-88c5-747228cbc2b5)
+https://github.com/user-attachments/assets/99f49860-f85d-4e7a-9fed-2170302d8aeb
