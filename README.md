@@ -40,8 +40,7 @@ With more time, I would have:
 ## What do you think is the weakest part of your project?
 The weakest part of the project is the lack of offline caching. This would have improved the user experience by allowing them to view the last fetched data when offline.
 
-## Did you copy any code or dependencies? Please make sure to attribute them here!
-Everything was fairly straightforward to implement from scratch. Reference `gradle/libs.versions.toml` for dependencies. 
+![List](https://github.com/user-attachments/assets/b5e2c489-3590-4f11-9dfd-f1499668e572)
 
-## Is there any other information you’d like us to know?
-I enjoyed working on this project and would love to hear your feedback. Thank you for the opportunity!
+
+![employeedetail](https://github.com/user-attachments/assets/6fecdf02-ccb5-4b1d-88c5-747228cbc2b5)
