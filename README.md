@@ -34,9 +34,8 @@ Approximately 1.5-2 hrs over 3 days.
 With more time, I would have:
 1. Improved offline caching using Room or DataStore.
 2. Made the UI more visually appealing.
-3. Taken the time to set up previews for the Composable functions.
-4. If the API supported pagination, I would have implemented it. 
-5. I also went with the deprecated accompanist library for the swipe to refresh feature. I would have used the new Jetpack Compose library if I had more time to look into it.
+3. Accounted for multiple device types with a two pane display for larger screens. 
+4. If the API supported pagination and search for large datasets, I would have implemented it. 
 
 ## What do you think is the weakest part of your project?
 The weakest part of the project is the lack of offline caching. This would have improved the user experience by allowing them to view the last fetched data when offline.
